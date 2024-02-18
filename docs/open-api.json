@@ -1,0 +1,167 @@
+{
+    "openapi":"3.0.2",
+    "info": {
+        "title":"Documentation NFC Card Access",
+        "version":"1.0",
+        "description": "Documentation for Monitoring Akses NFC",
+    },
+    "servers": [
+        {
+            "url":"https://localhost:8000"
+        }
+    ],
+    "paths": {
+        "/get/card/number/{card_id}" :{
+            "get" : {
+                "tags": ["Card Registration"],
+                "description": "Get card number for registration user",
+                "parameters": [
+                    {
+                        "name": "card_id",
+                        "in": "path",
+                        "required": true,
+                        "description": "nfc card number",
+                        "schema" : {
+                            "type": "string",
+                        },
+                        "examples" : {
+                            "Card Id ex1" : {
+                                "description" : "Contoh card number",
+                                "value" : "qerybasgd34das2b"
+                            },
+                            "Card Id ex2" : {
+                                "description": "Contoh card number",
+                                "value" : "27354292364"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200" : {
+                        "description": "Success send card id",
+                        "content": {
+                            "application/json" : {
+                                "schema" : {
+                                    "type": "object",
+                                    "properties": {
+                                        "success" : {
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "examples" : {
+                                    "success" : {
+                                        "description": "Berhasil Mengirimkan Data Card Id",
+                                        "value" : {
+                                            "success" : "Berhasil",
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404" : {
+                        "description": "Failed to send card id",
+                        "content": {
+                            "application/json" :{
+                                "schema" : {
+                                    "type": "object",
+                                    "properties": {
+                                        "success" : {
+                                            "type": "string",
+                                        }
+                                    }
+                                },
+                                "examples": {
+                                    "failed" : {
+                                        "description": "Gagal mengirimkan card id",
+                                        "value" : {
+                                            "success" : "Gagal"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/check/card/number/{card_id}" : {
+            "get" : {
+                "tags": ["Card Access"],
+                "description": "Check card id on database",
+                "parameters": [
+                    {
+                        "name": "card_id",
+                        "in": "path",
+                        "required": true,
+                        "description": "nfc card number",
+                        "schema" : {
+                            "type": "string",
+                        },
+                        "examples": {
+                            "Card Id ex1" : {
+                                "description" : "Contoh card number",
+                                "value" : "qerybasgd34das2b"
+                            },
+                            "Card Id ex2" : {
+                                "description": "Contoh card number",
+                                "value" : "27354292364"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200" : {
+                        "description": "card id has found on database",
+                        "content": {
+                            "application/json" : {
+                                "schema" :{
+                                    "type": "object",
+                                    "properties": {
+                                        "success" : {
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "examples" : {
+                                    "success": {
+                                        "description" : "Berhasil Menemukan Data Card Id",
+                                        "value" : {
+                                            "success" : "Berhasil",
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404" : {
+                        "description": "card id not found on database",
+                        "content": {
+                            "application/json" : {
+                                "schema" : {
+                                    "type": "object",
+                                    "properties": {
+                                        "success" : {
+                                            "type": "string",
+                                        }
+                                    }
+                                },
+                                "examples": {
+                                    "failed" : {
+                                        "description" : "Gagal menemukan Data Card Id",
+                                        "value" : {
+                                            "success" : "Gagal"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                
+            }
+        }
+    }
+    
+}

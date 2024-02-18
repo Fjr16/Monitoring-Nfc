@@ -52,20 +52,19 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
         $request->validate([
             'role' => ['required'],
             'name' => ['required'],
             'no_kartu' => ['required', 'unique:users'],
             'username' => ['required', 'string', 'max:255', 'unique:users'],
-            'password' => ['required', Rules\Password::defaults()],
+            'password' => Rules\Password::defaults(),
         ]);
         $data = $request->all();
         $data['password'] = Hash::make($request->password);
-        if(User::create($data)){
-            $dataCardNumber = CardTemporary::get()->pluck('id');
-            CardTemporary::destroy($dataCardNumber);
-        }
+        User::create($data);
+
+        $dataCardNumber = CardTemporary::get()->pluck('id');
+        CardTemporary::destroy($dataCardNumber);
 
         return redirect()->route('user.index')->with('success', 'Berhasil Ditambahkan');
     }

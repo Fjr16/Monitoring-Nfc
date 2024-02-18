@@ -1,3 +1,4 @@
+
 <?php
 
 use Illuminate\Database\Migrations\Migration;
@@ -13,7 +14,7 @@ return new class extends Migration
     {
         Schema::create('card_temporaries', function (Blueprint $table) {
             $table->id();
-            $table->integer('no_kartu');
+            $table->string('no_kartu');
             $table->timestamps();
         });
     }

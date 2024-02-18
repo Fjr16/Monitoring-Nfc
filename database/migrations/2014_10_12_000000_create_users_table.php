@@ -19,7 +19,7 @@ return new class extends Migration
             $table->longText('alamat')->nullable();
             $table->string('tempat_lhr')->nullable();
             $table->date('tanggal_lhr')->nullable();
-            $table->integer('no_kartu')->nullable();
+            $table->string('no_kartu')->nullable();
             $table->string('role')->default('User');
             $table->string('username')->nullable();
             $table->string('password')->nullable();

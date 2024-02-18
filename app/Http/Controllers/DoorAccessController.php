@@ -21,9 +21,13 @@ class DoorAccessController extends Controller
                 // 'image' => null,
             ]);
 
-            return response()->json('Berhasil');
+            return response()->json([
+                'success' => 'Berhasil' 
+            ], 200); 
         }else{
-            return 'Data Tidak Ditemukan';
+            return response()->json([
+                'success' => 'Gagal'
+            ], 404);
         }
     }
 

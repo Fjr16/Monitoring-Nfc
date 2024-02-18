@@ -30,16 +30,13 @@
                     @enderror
                 </div>
             </div>
-            @php
-                $passErrors = $errors->get('password');
-            @endphp
             <div class="mb-3 row">
                 <label for="nama" class="col-md-2 col-form-label">Password</label>
                 <div class="col-md-10">
                   <input class="form-control @error('password') is-invalid @enderror" type="password" value="{{ old('password') }}" id="password" name="password" autocomplete="" />
-                  @if ($passErrors) 
+                  @if ($errors->get('password')) 
                     <div class="text-danger">
-                        @foreach ($passErrors as $error)
+                        @foreach ($errors->get('password') as $error)
                             *{{ $error }}
                         @endforeach
                     </div>
@@ -80,7 +77,7 @@
             <div class="mb-3 row">
                 <label for="no" class="col-md-2 col-form-label">no. kartu</label>
                 <div class="col-md-10">
-                  <input class="form-control @error('no_kartu') is-invalid @enderror" type="number" value="{{ old('no_kartu') }}" id="no_kartu" name="no_kartu" />
+                  <input class="form-control @error('no_kartu') is-invalid @enderror" type="text" value="{{ old('no_kartu') }}" id="no_kartu" name="no_kartu" readonly/>
                   @error('no_kartu')
                       <div class="text-danger">
                           {{ $message }}

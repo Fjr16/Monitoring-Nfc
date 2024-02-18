@@ -18,7 +18,9 @@ class GetCardNumberController extends Controller
             'no_kartu' => $card_id,
         ]);
 
-        return 'Berhasil';
+        return response()->json([
+            'success' => 'Berhasil'
+        ]);
 
     }
 
