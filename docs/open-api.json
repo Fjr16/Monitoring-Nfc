@@ -3,7 +3,7 @@
     "info": {
         "title":"Documentation NFC Card Access",
         "version":"1.0",
-        "description": "Documentation for Monitoring Akses NFC",
+        "description": "Documentation for Monitoring Akses NFC"
     },
     "servers": [
         {
@@ -22,7 +22,7 @@
                         "required": true,
                         "description": "nfc card number",
                         "schema" : {
-                            "type": "string",
+                            "type": "string"
                         },
                         "examples" : {
                             "Card Id ex1" : {
@@ -53,7 +53,7 @@
                                     "success" : {
                                         "description": "Berhasil Mengirimkan Data Card Id",
                                         "value" : {
-                                            "success" : "Berhasil",
+                                            "success" : "Berhasil"
                                         }
                                     }
                                 }
@@ -68,7 +68,7 @@
                                     "type": "object",
                                     "properties": {
                                         "success" : {
-                                            "type": "string",
+                                            "type": "string"
                                         }
                                     }
                                 },
@@ -86,31 +86,49 @@
                 }
             }
         },
-        "/check/card/number/{card_id}" : {
-            "get" : {
+        "/check/card/number" : {
+            "post" : {
                 "tags": ["Card Access"],
                 "description": "Check card id on database",
-                "parameters": [
-                    {
-                        "name": "card_id",
-                        "in": "path",
-                        "required": true,
-                        "description": "nfc card number",
-                        "schema" : {
-                            "type": "string",
-                        },
-                        "examples": {
-                            "Card Id ex1" : {
-                                "description" : "Contoh card number",
-                                "value" : "qerybasgd34das2b"
+                "requestBody": {
+                    "required" : true,
+                    "content" : {
+                        "application/json" : {
+                            "schema" : {
+                                "type": "object",
+                                "properties": {
+                                    "card_id" : {
+                                        "type": "string",
+                                        "minLength": 1,
+                                        "maxLength": 8,
+                                        "required": true
+                                    },
+                                    "image" : {
+                                        "type": "string",
+                                        "required": true
+                                    }
+                                }
                             },
-                            "Card Id ex2" : {
-                                "description": "Contoh card number",
-                                "value" : "27354292364"
+                            "examples": {
+                                "Sample object 1" : {
+                                    "description" : "Contoh Request Body 1",
+                                    "value" : {
+                                        "card_id" : "qerybasgd34das2b",
+                                        "image" : "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAgElEQVR42mL8//8/AyUYTFBERwh9zFABub/OzhoqKaoqCihVVcoiCmqKCgoAAAAgABZpnvXu/8AAAAASUVORK5CYII="
+                                    }
+                                },
+                                "Sample object 2" : {
+                                    "description" : "Contoh Request Body 2",
+                                    "value" : {
+                                        "card_id" : "2364252347",
+                                        "image" : "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAgElEQVR42mL8//8/AyUYTFBERwh9zFABub/OzhoqKaoqCihVVcoiCmqKCgoAAAAgABZpnvXu/8AAAAASUVORK5CYII="
+                                    }
+                                }
                             }
                         }
                     }
-                ],
+                    
+                },
                 "responses": {
                     "200" : {
                         "description": "card id has found on database",
@@ -128,7 +146,7 @@
                                     "success": {
                                         "description" : "Berhasil Menemukan Data Card Id",
                                         "value" : {
-                                            "success" : "Berhasil",
+                                            "success" : "Berhasil"
                                         }
                                     }
                                 }
@@ -143,7 +161,7 @@
                                     "type": "object",
                                     "properties": {
                                         "success" : {
-                                            "type": "string",
+                                            "type": "string"
                                         }
                                     }
                                 },

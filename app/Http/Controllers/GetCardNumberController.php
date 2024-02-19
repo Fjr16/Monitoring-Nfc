@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use App\Models\CardTemporary;
 
 class GetCardNumberController extends Controller
@@ -20,8 +21,7 @@ class GetCardNumberController extends Controller
 
         return response()->json([
             'success' => 'Berhasil'
-        ]);
-
+        ], 200);
     }
 
     /**
