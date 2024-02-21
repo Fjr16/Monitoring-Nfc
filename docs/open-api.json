@@ -154,7 +154,7 @@
                         }
                     },
                     "404" : {
-                        "description": "card id not found on database",
+                        "description": "card id not found on database or card id and image field is null",
                         "content": {
                             "application/json" : {
                                 "schema" : {
@@ -167,7 +167,7 @@
                                 },
                                 "examples": {
                                     "failed" : {
-                                        "description" : "Gagal menemukan Data Card Id",
+                                        "description" : "Gagal menemukan Data Card Id atau Data card id atau image tidak diisi",
                                         "value" : {
                                             "success" : "Gagal"
                                         }

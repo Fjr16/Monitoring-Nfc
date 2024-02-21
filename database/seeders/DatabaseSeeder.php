@@ -36,7 +36,7 @@ class DatabaseSeeder extends Seeder
             'tempat_lhr' => 'Padang',
             'tanggal_lhr' => date('Y-m-d'),
             'no_kartu' => '1234',
-            'role' => 'Admin',
+            'role' => 'User',
             'username' => 'test',
             'password' => Hash::make('test123'),
         ]);

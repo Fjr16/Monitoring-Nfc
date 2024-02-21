@@ -5,7 +5,6 @@ use App\Http\Controllers\DoorAccessController;
 use App\Http\Controllers\GetCardNumberController;
 use App\Http\Controllers\MonitoringAccessNfcController;
 use App\Http\Controllers\UserController;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -49,6 +48,6 @@ Route::middleware('admin')->group(function () {
 Route::get('/get/card/number/{card_id}', [GetCardNumberController::class, 'index'])->name('get/card.number');
 
 // Door Access 
-Route::get('/check/card/number/{card_id}', [DoorAccessController::class, 'index'])->name('check/card.number');
+Route::post('/check/card/number', [DoorAccessController::class, 'index'])->name('check/card.number');
 
 require __DIR__.'/auth.php';
