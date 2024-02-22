@@ -16,29 +16,29 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         
-        // User::create([
-        //     'name' => 'Admin',
-        //     'jenis_kelamin' => 'Laki-laki',
-        //     'telp' => '08123432474',
-        //     'alamat' => 'Padang',
-        //     'tempat_lhr' => 'Padang',
-        //     'tanggal_lhr' => date('Y-m-d'),
-        //     'no_kartu' => null,
-        //     'role' => 'Admin',
-        //     'username' => 'admin',
-        //     'password' => Hash::make('admin123'),
-        // ]);
         User::create([
-            'name' => 'test',
+            'name' => 'Admin',
             'jenis_kelamin' => 'Laki-laki',
             'telp' => '08123432474',
             'alamat' => 'Padang',
             'tempat_lhr' => 'Padang',
             'tanggal_lhr' => date('Y-m-d'),
-            'no_kartu' => '1234',
-            'role' => 'User',
-            'username' => 'test',
-            'password' => Hash::make('test123'),
+            'no_kartu' => null,
+            'role' => 'Admin',
+            'username' => 'admin',
+            'password' => Hash::make('admin123'),
         ]);
+        // User::create([
+        //     'name' => 'test',
+        //     'jenis_kelamin' => 'Laki-laki',
+        //     'telp' => '08123432474',
+        //     'alamat' => 'Padang',
+        //     'tempat_lhr' => 'Padang',
+        //     'tanggal_lhr' => date('Y-m-d'),
+        //     'no_kartu' => '1234',
+        //     'role' => 'User',
+        //     'username' => 'test',
+        //     'password' => Hash::make('test123'),
+        // ]);
     }
 }

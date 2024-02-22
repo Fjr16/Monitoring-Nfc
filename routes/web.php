@@ -5,6 +5,7 @@ use App\Http\Controllers\DoorAccessController;
 use App\Http\Controllers\GetCardNumberController;
 use App\Http\Controllers\MonitoringAccessNfcController;
 use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,6 +18,11 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+Route::get('/seeder/user/admin', function () {
+    Artisan::call('db:seed');
+    return back()->with('success', 'Berhasil');
+});
 
 Route::get('/', function () {
     return view('auth.login');
