@@ -65,6 +65,17 @@
                 </div>
             </div>
             <div class="mb-3 row">
+                <label for="pin_number" class="col-md-2 col-form-label">Pin</label>
+                <div class="col-md-10">
+                  <input class="form-control @error('pin_number') is-invalid @enderror" type="number" oninput="this.value=this.value.slice(0,6)" value="{{ old('pin_number', $item->pin_number) }}" id="pin_number" name="pin_number" />
+                    @error('pin_number')
+                        <div class="text-danger">
+                            *{{ $message }}
+                        </div>
+                    @enderror
+                </div>
+            </div>
+            <div class="mb-3 row">
                 <label for="no" class="col-md-2 col-form-label">no. kartu</label>
                 <div class="col-md-10">
                 <input class="form-control @error('no_kartu') is-invalid @enderror" type="text" value="{{ old('no_kartu', $item->no_kartu) }}" id="no" name="no_kartu" />

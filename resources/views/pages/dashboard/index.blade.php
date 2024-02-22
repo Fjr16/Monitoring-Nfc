@@ -62,7 +62,7 @@
               <th>Nama</th>
               <th>Jenis Kelamin</th>
               <th>Alamat</th>
-              {{-- <th>Foto</th> --}}
+              <th>Foto</th>
             </tr>
           </thead>
           <tbody>
@@ -73,9 +73,9 @@
                 <td>{{ $item->user->name ?? '' }}</td>
                 <td>{{ $item->user->jenis_kelamin ?? '' }}</td>
                 <td>{!! $item->user->alamat ?? '' !!}</td>
-                {{-- <td>
-                    <img src="{{ asset('assets/img/tester.JPG') }}" width="90" alt="">
-                </td> --}}
+                <td>
+                    <img src="{{ asset('storage/' . $item->image) }}" width="90" alt="">
+                </td>
               </tr>
             @endforeach
           </tbody>

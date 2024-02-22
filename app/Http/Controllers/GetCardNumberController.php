@@ -20,7 +20,7 @@ class GetCardNumberController extends Controller
         ]);
 
         return response()->json([
-            'success' => 'Berhasil'
+            'status' => true
         ], 200);
     }
 

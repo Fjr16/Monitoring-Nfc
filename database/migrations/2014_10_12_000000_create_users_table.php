@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('role')->default('User');
             $table->string('username')->nullable();
             $table->string('password')->nullable();
+            $table->string('pin_number')->unique()->nullable();
             $table->timestamps();
             $table->softDeletes();
             $table->dropSoftDeletes();

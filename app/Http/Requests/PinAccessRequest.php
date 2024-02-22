@@ -6,7 +6,7 @@ use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 
-class CardAccessRequest extends FormRequest
+class PinAccessRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,14 +24,13 @@ class CardAccessRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'card_id' => ['required', 'string'],
+            'pin_number' => ['required', 'string', 'size:6'],
             'image' => ['required', 'string'],
         ];
     }
 
-    protected function failedValidation(Validator $validator)
-    {
-        throw new HttpResponseException(Response([
+    public function failedValidation(Validator $validator) {
+        throw new HttpResponseException(response([
             'status' => false,
         ], 404));
     }

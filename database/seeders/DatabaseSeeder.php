@@ -39,6 +39,7 @@ class DatabaseSeeder extends Seeder
         //     'role' => 'User',
         //     'username' => 'test',
         //     'password' => Hash::make('test123'),
+        //     'pin_number' => '123456',
         // ]);
     }
 }

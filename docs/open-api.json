@@ -11,9 +11,9 @@
         }
     ],
     "paths": {
-        "/get/card/number/{card_id}" :{
-            "get" : {
-                "tags": ["Card Registration"],
+        "/register/card/{card_id}" :{
+            "post" : {
+                "tags": ["Registration"],
                 "description": "Get card number for registration user",
                 "parameters": [
                     {
@@ -44,8 +44,8 @@
                                 "schema" : {
                                     "type": "object",
                                     "properties": {
-                                        "success" : {
-                                            "type": "string"
+                                        "status" : {
+                                            "type": "boolean"
                                         }
                                     }
                                 },
@@ -53,7 +53,7 @@
                                     "success" : {
                                         "description": "Berhasil Mengirimkan Data Card Id",
                                         "value" : {
-                                            "success" : "Berhasil"
+                                            "status" : true
                                         }
                                     }
                                 }
@@ -67,8 +67,8 @@
                                 "schema" : {
                                     "type": "object",
                                     "properties": {
-                                        "success" : {
-                                            "type": "string"
+                                        "status" : {
+                                            "type": "boolean"
                                         }
                                     }
                                 },
@@ -76,7 +76,7 @@
                                     "failed" : {
                                         "description": "Gagal mengirimkan card id",
                                         "value" : {
-                                            "success" : "Gagal"
+                                            "status" : false
                                         }
                                     }
                                 }
@@ -86,9 +86,9 @@
                 }
             }
         },
-        "/check/card/number" : {
+        "/login/card" : {
             "post" : {
-                "tags": ["Card Access"],
+                "tags": ["Access"],
                 "description": "Check card id on database",
                 "requestBody": {
                     "required" : true,
@@ -99,8 +99,6 @@
                                 "properties": {
                                     "card_id" : {
                                         "type": "string",
-                                        "minLength": 1,
-                                        "maxLength": 8,
                                         "required": true
                                     },
                                     "image" : {
@@ -137,8 +135,8 @@
                                 "schema" :{
                                     "type": "object",
                                     "properties": {
-                                        "success" : {
-                                            "type": "string"
+                                        "status" : {
+                                            "type": "boolean"
                                         }
                                     }
                                 },
@@ -146,7 +144,7 @@
                                     "success": {
                                         "description" : "Berhasil Menemukan Data Card Id",
                                         "value" : {
-                                            "success" : "Berhasil"
+                                            "status" : true
                                         }
                                     }
                                 }
@@ -160,8 +158,8 @@
                                 "schema" : {
                                     "type": "object",
                                     "properties": {
-                                        "success" : {
-                                            "type": "string"
+                                        "status" : {
+                                            "type": "boolean"
                                         }
                                     }
                                 },
@@ -169,7 +167,7 @@
                                     "failed" : {
                                         "description" : "Gagal menemukan Data Card Id atau Data card id atau image tidak diisi",
                                         "value" : {
-                                            "success" : "Gagal"
+                                            "status" : false
                                         }
                                     }
                                 }
@@ -178,6 +176,91 @@
                     }
                 }
                 
+            }
+        },
+
+        "/login/pin" : {
+            "post" : {
+                "tags": ["Access"],
+                "description": "Accessing Door By Pin",
+                "requestBody" : {
+                    "required": true,
+                    "content": {
+                        "application/json" : {
+                            "schema" : {
+                                "type": "object",
+                                "properties": {
+                                    "pin_number" : {
+                                        "type": "string",
+                                        "required": true,
+                                        "maxLength": 6
+                                    },
+                                    "image" : {
+                                        "type": "string",
+                                        "required": true
+                                    }
+                                }
+                            },
+                            "examples": {
+                                "sample object" : {
+                                    "description": "Example payload for accessing door by pin",
+                                    "value" : {
+                                        "pin_number" : "123456",
+                                        "image" : "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAgElEQVR42mL8//8/AyUYTFBERwh9zFABub/OzhoqKaoqCihVVcoiCmqKCgoAAAAgABZpnvXu/8AAAAASUVORK5CYII="
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200" : {
+                        "description": "Success access",
+                        "content": {
+                            "application/json" : {
+                                "schema" : {
+                                    "type": "object",
+                                    "properties": {
+                                        "status" : {
+                                            "type" : "boolean"
+                                        } 
+                                    }
+                                },
+                                "examples": {
+                                    "success" : {
+                                        "description": "success to access",
+                                        "value" : {
+                                            "status" : true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404" : {
+                        "description": "Failed Access",
+                        "content": {
+                            "application/json" : {
+                                "schema" : {
+                                    "type": "object",
+                                    "properties": {
+                                        "status" : {
+                                            "type": "boolean"
+                                        }
+                                    }
+                                },
+                                "examples": {
+                                    "failed" : {
+                                        "description": "Failed to access",
+                                        "value" : {
+                                            "status" : false
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
     }

@@ -57,6 +57,7 @@ class UserController extends Controller
             'name' => ['required'],
             'no_kartu' => ['required', 'unique:users'],
             'username' => ['required', 'string', 'max:255', 'unique:users'],
+            'pin_number' => ['required', 'string', 'unique:users', 'size:6'],
             'password' => Rules\Password::defaults(),
         ]);
         $data = $request->all();
@@ -111,6 +112,7 @@ class UserController extends Controller
         $dataToValidation = [
             'role' => ['required'],
             'name' => ['required'],
+            'pin_number' => ['required', 'string', 'size:6', Rule::unique('users')->ignore($item->id)],
             'no_kartu' => ['required', Rule::unique('users')->ignore($item->id)],
             'username' => ['required', 'string', 'max:255', Rule::unique('users')->ignore($item->id)],
         ];

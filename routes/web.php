@@ -19,10 +19,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/seeder/user/admin', function () {
-    Artisan::call('db:seed');
-    return back()->with('success', 'Berhasil');
-});
+// Route::get('/seeder/user/admin', function () {
+//     Artisan::call('db:seed');
+//     return back()->with('success', 'Berhasil');
+// });
 
 Route::get('/', function () {
     return view('auth.login');
@@ -51,9 +51,12 @@ Route::middleware('admin')->group(function () {
 });
 
 // create card number on temporary card number table
-Route::get('/get/card/number/{card_id}', [GetCardNumberController::class, 'index'])->name('get/card.number');
+Route::post('/register/card/{card_id}', [GetCardNumberController::class, 'index'])->name('register.card');
 
-// Door Access 
-Route::post('/check/card/number', [DoorAccessController::class, 'index'])->name('check/card.number');
+// Door Access By Card
+Route::post('/login/card', [DoorAccessController::class, 'index'])->name('login.card');
+
+// Door Access By Pin
+Route::post('/login/pin', [DoorAccessController::class, 'create'])->name('login.pin');
 
 require __DIR__.'/auth.php';

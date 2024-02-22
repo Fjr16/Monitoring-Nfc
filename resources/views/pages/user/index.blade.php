@@ -29,12 +29,12 @@
           @foreach ($data as $item)    
             <tr>
               <td>{{ $loop->iteration }}</td>
-              <td>{{ $item->name ?? '' }}</td>
-              <td>{{ $item->jenis_kelamin ?? '' }}</td>
-              <td>{{ $item->no_kartu ?? '' }}</td>
-              <td>{{ $item->role ?? '' }}</td>
-              <td>{{ $item->telp ?? '' }}</td>
-              <td>{!! $item->alamat ?? '' !!}</td>
+              <td>{{ $item->name ?? '-' }}</td>
+              <td>{{ $item->jenis_kelamin ?? '-' }}</td>
+              <td>{{ $item->no_kartu ?? '-' }}</td>
+              <td>{{ $item->role ?? '-' }}</td>
+              <td>{{ $item->telp ?? '-' }}</td>
+              <td>{!! $item->alamat ?? '-' !!}</td>
               <td class="text-center">
                 <div class="dropdown">
                   <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i class="bx bx-dots-vertical-rounded"></i></button>
