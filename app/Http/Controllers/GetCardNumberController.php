@@ -10,7 +10,7 @@ class GetCardNumberController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index($card_id)
+    public function index(Request $request, $card_id)
     {
         $data = CardTemporary::get()->pluck('id');
         CardTemporary::destroy($data);
