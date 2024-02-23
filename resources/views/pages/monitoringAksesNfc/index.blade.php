@@ -15,7 +15,7 @@
           </tr>
         </thead>
         <tbody>
-          @foreach ($data as $item)    
+          @foreach ($data as $item)
             <tr>
               <td>{{ $item->tanggal ?? '' }}</td>
               <td>{{ $item->user->no_kartu ?? '' }}</td>
@@ -23,7 +23,7 @@
               <td>{{ $item->user->jenis_kelamin ?? '' }}</td>
               <td>{!! $item->user->alamat ?? '' !!}</td>
               <td>
-                  <img src="{{ asset('storage/'. $item->image ?? '') }}" width="90" alt="">
+                  <img src="{{ asset('/'. $item->image ?? '') }}" width="90" alt="">
               </td>
             </tr>
           @endforeach

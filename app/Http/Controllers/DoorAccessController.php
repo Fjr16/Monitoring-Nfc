@@ -14,62 +14,67 @@ class DoorAccessController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(CardAccessRequest $request)
-    {
-        $data = $request->validated();
-        $item = User::where('no_kartu', $data['card_id'])->first();
-        if (!$item) {
-            return response()->json([
-                'status' => false
-            ], 404);
-        }
+public function index(Request $request)
+{
+    $request->validate([
+        'card_id' => ['required', 'string'],
+        'image' => ['required', 'image'],
+    ]);
 
-        // decode image base64 and save at public storage
-        $base64StringImg = explode('data:image/png;base64,', $request->image);
-        $imgData = base64_decode($base64StringImg[1]);
-        $fileName = 'assets/img/' . uniqid() . '.png';
-        Storage::put('public/'. $fileName, $imgData);
-    
-        MonitoringSystem::create([
-            'user_id' => $item->id,
-            'tanggal' => date('Y-m-d H:i:s'),
-            'image' => $fileName,
-        ]);
-    
+
+    $item = User::where('no_kartu', $request->card_id)->first();
+    if (!$item) {
         return response()->json([
-            'status' => true 
-        ], 200); 
+            'status' => false
+        ], 404);
     }
+
+    // Save the uploaded image
+    $imagePath = $request->file('image')->store('assets/img');
+
+
+    MonitoringSystem::create([
+        'user_id' => $item->id,
+        'tanggal' => now(),
+        'image' => $imagePath,
+    ]);
+
+    return response()->json([
+        'status' => true
+    ], 200);
+}
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create(PinAccessRequest $request)
+    public function create(Request $request)
     {
-        $data = $request->validated();
+        error_log("SAMPAI SINI");
+    $request->validate([
+        'pin_number' => ['required', 'string'],
+        'image' => ['required', 'image'],
+    ]);
 
-        $findUser = User::where('pin_number', $data['pin_number'])->first();
-        if (!$findUser) {
-            return response()->json([
-                'status' => false
-            ], 404);
-        }
-
-        // decode image base64 and save at public storage
-        $base64StringImg = explode('data:image/png;base64,', $request->image);
-        $imgData = base64_decode($base64StringImg[1]);
-        $fileName = 'assets/img/' . uniqid() . '.png';
-        Storage::put('public/'. $fileName, $imgData);
-
-        MonitoringSystem::create([
-            'user_id' => $findUser->id,
-            'tanggal' => date('Y-m-d H:i:s'),
-            'image' => $fileName,
-        ]);
-
+    $item = User::where('pin_number', $request->pin_number)->first();
+    if (!$item) {
         return response()->json([
-            'status' => true 
-        ], 200); 
+            'status' => false
+        ], 404);
+    }
+
+    // Save the uploaded image
+    $imagePath = $request->file('image')->store('assets/img');
+
+
+    MonitoringSystem::create([
+        'user_id' => $item->id,
+        'tanggal' => now(),
+        'image' => $imagePath,
+    ]);
+
+    return response()->json([
+        'status' => true
+    ], 200);
     }
 
     /**
