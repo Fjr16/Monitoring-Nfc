@@ -49,7 +49,6 @@ public function index(Request $request)
      */
     public function create(Request $request)
     {
-        error_log("SAMPAI SINI");
     $request->validate([
         'pin_number' => ['required', 'string'],
         'image' => ['required', 'image'],
