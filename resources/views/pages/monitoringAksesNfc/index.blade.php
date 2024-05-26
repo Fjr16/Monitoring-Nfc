@@ -1,7 +1,10 @@
 @extends('layouts.backend.main')
 @section('content')
 <div class="card">
-    <h5 class="card-header">Monitoring Akses NFC</h5>
+  <div class="card-header d-flex">
+    <h5>Monitoring Akses NFC</h5>
+    <a href="{{ route('monitoring/access/nfc.show') }}" class="ms-auto btn btn-primary" target="_blank"><i class="bx bx-printer"></i> Print</a>
+  </div>
     <div class="table-responsive px-3">
       <table id="datatable" class="table card-table">
         <thead class="bg-warning">

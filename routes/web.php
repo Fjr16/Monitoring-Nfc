@@ -29,12 +29,13 @@ Route::get('/', function () {
 })->middleware('guest');
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard.index');
+    Route::get('/dashboard/{filter}', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard.index');
 });
 
 Route::middleware(['manager.or.admin:Admin,Manager'])->group(function(){
     // Monitoring Akses
     Route::get('/monitoring/access/nfc', [MonitoringAccessNfcController::class, 'index'])->name('monitoring/access/nfc.index');
+    Route::get('/monitoring/access/nfc/show', [MonitoringAccessNfcController::class, 'show'])->name('monitoring/access/nfc.show');
 });
 
 Route::middleware('admin')->group(function () {        

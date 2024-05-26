@@ -490,11 +490,14 @@
 
   // Income Chart - Area chart
   // --------------------------------------------------------------------
+  var idIncome = document.querySelector('#incomeChart');
+  const dataFromServer = JSON.parse(idIncome.getAttribute('data-data'));
+  dataFromServer.series.splice(0,0,0); //memasukkan 0 ke dalam array untuk awalan
   const incomeChartEl = document.querySelector('#incomeChart'),
     incomeChartConfig = {
       series: [
         {
-          data: [24, 21, 30, 22, 42, 26, 35, 29]
+          data: dataFromServer.series
         }
       ],
       chart: {
@@ -525,7 +528,7 @@
           {
             fillColor: config.colors.white,
             seriesIndex: 0,
-            dataPointIndex: 7,
+            dataPointIndex: 12,
             strokeColor: config.colors.primary,
             strokeWidth: 2,
             size: 6,
@@ -558,7 +561,7 @@
         }
       },
       xaxis: {
-        categories: ['', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
+        categories: dataFromServer.categories,
         axisBorder: {
           show: false
         },
@@ -575,11 +578,15 @@
       },
       yaxis: {
         labels: {
-          show: false
+          show: true,
+          style: {
+            fontSize: '13px',
+            colors: axisColor
+          }
         },
-        min: 10,
+        min: 0,
         max: 50,
-        tickAmount: 4
+        tickAmount: 5
       }
     };
   if (typeof incomeChartEl !== undefined && incomeChartEl !== null) {
