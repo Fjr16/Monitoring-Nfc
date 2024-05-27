@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\MonitoringSystem;
-use Carbon\Carbon;
 use DateTime;
 
 class DashboardController extends Controller
@@ -57,7 +56,7 @@ class DashboardController extends Controller
             $arrCountDaily = [];
             $dataTanggal = [];
             $dataTanggal = [''];
-            for ($i=$tglCurrent-10; $i <= $tglCurrent; $i++) { 
+            for ($i=1; $i <= $tglCurrent; $i++) { 
                 $dataTanggal[] = $i;
                 $arrCountDaily[] = MonitoringSystem::whereYear('created_at', $today->format('Y'))
                                                     ->whereMonth('created_at', $today->format('m'))

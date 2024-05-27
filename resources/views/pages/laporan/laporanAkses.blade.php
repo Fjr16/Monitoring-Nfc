@@ -101,44 +101,15 @@
             <table class="table-bordered w-100 mt-4">
                 <thead>
                     <tr class="text-center">
-                        <th>Tanggal/Jam Akses</th>
-                        <th>No. Kartu</th>
-                        <th>Nama</th>
-                        <th>Jenis Kelamin</th>
-                        <th>Alamat</th>
-                        <th>Foto</th>
+                        {!! $data['theads'] !!}
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($data as $item)
-                        <tr>
-                            <td>{{ $item->tanggal ?? '' }}</td>
-                            <td>{{ $item->user->no_kartu ?? ''}}</td>
-                            <td>{{ $item->user->name ?? '' }}</td>
-                            <td>{!! $item->user->jenis_kelamin ?? '' !!}</td>
-                            <td>{!! $item->user->alamat ?? '' !!}</td>
-                            <td>
-                                <img src="{{ asset('/'. $item->image ?? '') }}" width="90" alt="">
-                            </td>
-                        </tr>
-                    @endforeach
+                    {!! $data['tbodys'] !!}
                 </tbody>
             </table>
         </div>
-
     </div>
-
-    <script>
-        // Mendapatkan tanggal saat ini
-        var today = new Date();
-        var options = {
-            year: "numeric",
-            month: "long",
-            day: "numeric"
-        };
-        document.getElementById("tanggal").innerText =
-            today.toLocaleDateString("id-ID", options);
-    </script>
 </body>
 
 </html>

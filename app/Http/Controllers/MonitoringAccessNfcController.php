@@ -39,9 +39,9 @@ class MonitoringAccessNfcController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show()
+    public function show(Request $request)
     {
-        $data = MonitoringSystem::all();
+        $data = $request->all();
         return view('pages.laporan.laporanAkses', [
             "title" => "Monitoring Akses NFC",
             "menu" => "Monitoring Akses NFC",

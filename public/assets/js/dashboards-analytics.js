@@ -528,7 +528,7 @@
           {
             fillColor: config.colors.white,
             seriesIndex: 0,
-            dataPointIndex: 12,
+            dataPointIndex: 0,
             strokeColor: config.colors.primary,
             strokeWidth: 2,
             size: 6,

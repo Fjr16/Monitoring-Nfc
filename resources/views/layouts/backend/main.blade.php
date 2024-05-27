@@ -17,7 +17,7 @@
 
     <title>Monitoring NFC | {{ $title }}</title>
 
-    <meta name="description" content="" />
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
 
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="{{ asset('assets/img/favicon/favicon.ico') }}" />
@@ -115,7 +115,55 @@
     <script src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.min.js"></script>
     <script>
         $(document).ready(function() {
-        $('#datatable').DataTable();
+          var table = $('#datatable').DataTable();
+
+          var endPointToPrint = `{{ route('monitoring/access/nfc.show') }}`;
+
+          $('#print').on('click', function(){
+            var filteredData = table.rows({ filter:'applied' }).nodes();
+            var thead = table.columns().header().toArray().map(header => `<th>${header.innerText}</th>`).join('');
+            var tbody = '';
+            filteredData.each(function(value) {
+                var row = $(value).children().toArray().map(cell => {
+                  var cellContent = cell.innerHTML;
+                  return `<td>${cellContent}</td>`
+                }).join('');
+                row = `<tr>${row}</tr>`;
+                tbody += row;
+            });
+
+            // Buat form dinamis
+            var form = $('<form>', {
+                method: 'POST',
+                action: endPointToPrint,
+                target: '_blank' // Buka di tab baru
+            });
+
+            // get csrf token laravel to request method post
+            var csrfToken = $('meta[name="csrf-token"]').attr('content');
+            form.append($('<input>', {
+                type: 'hidden',
+                name: '_token',
+                value: csrfToken
+            }));
+
+            // Tambahkan data thead dan tbody ke form
+            form.append($('<input>', {
+                type: 'hidden',
+                name: 'theads',
+                value: thead
+            }));
+            form.append($('<input>', {
+                type: 'hidden',
+                name: 'tbodys',
+                value: tbody
+            }));
+
+            // Append form ke body dan submit
+            $('body').append(form);
+            form.submit();
+          });
+
         });
     </script>
 
